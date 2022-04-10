@@ -14,7 +14,6 @@ origins = [
 
 class Item(BaseModel):
     title: str
-    img_url:str 
     description: str
     reference: str 
     author: str 
