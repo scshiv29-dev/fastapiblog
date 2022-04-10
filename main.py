@@ -53,7 +53,7 @@ async def get_blog():
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Blog backend created by instagram.com/happypanda.digital"}
 
 @app.delete("/delete/blog/{blogid}")
 async def delete_blog(blogid):
