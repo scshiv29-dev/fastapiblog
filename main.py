@@ -27,7 +27,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-conn_string=("mongodb+srv://lawop:thelaw123@cluster0.nyv1k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+conn_string=("")
 client=MongoClient(conn_string,serverSelectionTimeoutMS=5000)
 try:
     print(client.server_info())
