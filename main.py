@@ -5,6 +5,7 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from fastapi.middleware.cors import CORSMiddleware
 
+conn_string=("")
 origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
@@ -13,12 +14,13 @@ origins = [
 ]
 
 class Item(BaseModel):
-    title: str
-    description: str
-    reference: str 
-    author: str 
+    title: str #title of the blog
+    image_ref:str ##one keyword related to blog
+    description: str ##description of the blog 
+    reference: str ## reference enter none if nothing   
+    author: str ## author name 
 
-app = FastAPI()
+app = FastAPI() ### initializing the fast api app
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -26,8 +28,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-conn_string=("")
-client=MongoClient(conn_string,serverSelectionTimeoutMS=5000)
+
+client=MongoClient(conn_string,serverSelectionTimeoutMS=5000) ## connecting to mongodb
 try:
     print(client.server_info())
 except Exception:
@@ -35,6 +37,8 @@ except Exception:
 
 db=client.get_database("myFirstDatabase")
 blog=db.get_collection("Blog")
+
+##create blog route
 @app.post("/create/blog")
 async def create_blog(item:Item):
     print(item,item.dict())
@@ -42,7 +46,7 @@ async def create_blog(item:Item):
     print(res)
     return {"msg":"success"}
 
-
+## get all blog route
 @app.get("/get/blogs")
 async def get_blog():
     items=blog.find()
@@ -54,6 +58,7 @@ async def get_blog():
 async def root():
     return {"message": "Blog backend created by instagram.com/happypanda.digital"}
 
+## delete route for blog
 @app.delete("/delete/blog/{blogid}")
 async def delete_blog(blogid):
     result=blog.delete_one({"_id":ObjectId(blogid)})
