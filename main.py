@@ -5,7 +5,7 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from fastapi.middleware.cors import CORSMiddleware
 
-conn_string=("")
+conn_string=("mongodb://cl2k79r9h00040ooh29tef2ff:8H5isEhiFj4zYo1Wo0Q6Qmyk@dashboard.lawcoolify.ml:9000/?readPreference=primary&ssl=false")
 origins = [
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
